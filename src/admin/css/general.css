@@ -1,0 +1,42 @@
+body{
+    background-color: #000;
+}
+*{
+    color: #fff;
+    font-family: 'SourceSansPro', sans-serif;
+}
+.form{
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #fff;
+}
+.site-name a{
+    text-decoration: none;
+    color: #fff;
+}
+
+h3{
+    font-size: 25px!important;
+    color: #fff!important;
+    font-family: 'montserrat', sans-serif!important;
+}
+.home .box{
+    background-color: #1b1b1b;
+    border: 2px solid #444;
+    border-radius: 5px;
+}
+.box .details{
+    font-family: 'montserrat', sans-serif!important;
+}
+
+.create-main img{
+    height: 300px;
+    width: 300px;
+}
+.create-main .file{
+    display: none;
+}
+.create-main .form{
+    background-color: #1b1b1b;
+    color: #fff;
+}

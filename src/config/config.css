@@ -1,0 +1,16 @@
+*{
+    font-family: 'SourceSansPro', sans-serif;
+    color: #fff;
+}
+body{
+    /* background: #000!important; */
+}
+main{
+    padding: 2% 5% 2% 15%;
+}
+main h1 span{
+    font-family: 'montserrat', sans-serif;
+}
+h1 .username{
+    font-size: 16px;
+}

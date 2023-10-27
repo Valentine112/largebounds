@@ -1,0 +1,93 @@
+body{
+    background-color: #000;
+}
+
+.collapse ul, .collapse ul li{
+    font-size: 13px!important;
+    list-style: none;
+}
+.box{
+    background: linear-gradient(145deg, #444, #000);
+    padding: 20px 20px;
+    border-radius: 10px;
+    border: 2px solid #444;
+    margin: 2% 2%;
+    position: relative;
+}
+.box > div:last-child{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: fit-content;
+    width: fit-content;
+}
+.box > div:last-child i{
+    background-color: #444;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 50px;
+    color: #fff;
+}
+.box .balance sup{
+    font-family: 'montserrat';
+}
+.balance span{
+    font-size: 35px;
+}
+.form{
+    background-color: #5e5e5e;
+    width: 90%;
+    border: 1px solid #444;
+    padding: 2%;
+    color: #fff;
+    border-radius: 5px;
+}
+.profile button{
+    width: 90%;
+    padding: 2%;
+}
+.profile .profile-form > div{
+    margin: 4% 0;
+}
+
+.downlines h5, h.downlines h3 {
+    color: orange;
+}
+.downlines .referred-people {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+}
+.downlines ul li{
+    font-size: 20px;
+    border-bottom: 1px solid #444;
+    padding: 10px;
+}
+.investments .table-responsive{
+    display: block;
+    width: 100%;
+}
+
+.packages .package-box{
+    background: linear-gradient(145deg, #444, #000);
+    padding: 25px 30px;
+}
+.packages .bronze{
+   color: rgba(165, 42, 42, 0.676);
+}
+.packages .silver{
+   color: silver;
+}
+.packages .gold{
+   color: gold;
+}
+.packages .vip{
+   color: #ED3E3E;
+}
+.packages ul li{
+   padding: 10px 0;
+}
+.packages .package-box button{
+    background: linear-gradient(145deg, #444, #000);
+    border: 1px solid grey;
+}
