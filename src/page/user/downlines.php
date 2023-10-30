@@ -34,10 +34,10 @@
             <h3>Downlines</h3>
             <div class="referred-people">
                 <ul>
-                    <?php if($value1[1] < 1): ?>
+                    <?php if($referralBonus[1] < 1): ?>
                         <li>No referrals yet</li>
                     <?php else: 
-                        foreach($value1[0] as $data): 
+                        foreach($referralBonus[0] as $data): 
                     ?>
                         <li>You referred <?= $data['username']; ?></li>
                     <?php endforeach; endif; ?>
@@ -52,11 +52,11 @@
 
                 <div class="referred-people">
                     <ul>
-                        <?php if($value[1] < 1): ?>
+                        <?php if($referral[1] < 1): ?>
                             <li>You have no bonus from your downliners</li>
                         <?php 
                             else: 
-                            foreach($value[0] as $data): 
+                            foreach($referral[0] as $data): 
                         ?>
                             <li>You received <?= "$".$data['amount']." from <span style='font-weight: 400'>".$data['username']."</span>"; ?></li>
                         <?php endforeach; endif; ?>

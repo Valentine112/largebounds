@@ -193,3 +193,9 @@ function action(self, type, id) {
 function res(type, message) {
     return `<div class='alert alert-${type} py-1'>${message}</div>`
 }
+
+function submit(self, tyoe) {
+    if(type == "pay") {
+        
+    }
+}

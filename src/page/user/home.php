@@ -25,7 +25,7 @@
 
             <div class="col-6 text-right">
                 <h1>
-                    <span class="username">Himself</span>
+                    <span class="username"><?= $user['username']; ?></span>
                 </h1>
             </div>
         </div>
@@ -37,7 +37,7 @@
                         <small>Balance</small>
                     </div>
                     <div class="balance">
-                        <sup>$</sup>&ensp;<span>0.00</span>
+                        <sup>$</sup>&ensp;<span><?= $user['walletbalance']; ?>.00</span>
                     </div>
                     <div>
                         <small id="date"></small>
@@ -54,7 +54,7 @@
                         <small>Interest</small>
                     </div>
                     <div class="balance">
-                        <sup>$</sup>&ensp;<span>0.00</span>
+                        <sup>$</sup>&ensp;<span><?= $profit; ?>.00</span>
                     </div>
                     <div>
                         <small id="date"></small>
@@ -71,7 +71,7 @@
                         <small>Rate</small>
                     </div>
                     <div class="balance">
-                    <span>0.00</span>&ensp;<sup>%</sup>
+                    <span><?= $increase; ?></span>&ensp;<sup>%</sup>
                     </div>
                     <div>
                         <small id="date"></small>
@@ -88,7 +88,7 @@
                         <small>Withdrawn</small>
                     </div>
                     <div class="balance">
-                        <sup>$</sup>&ensp;<span>0.00</span>
+                        <sup>$</sup>&ensp;<span><?= $withdrawn; ?>.00</span>
                     </div>
                     <div>
                         <small id="date"></small>
@@ -103,10 +103,13 @@
         </section>
 
         <section>
-            <!-- Stocks Chart -->
-            <div class="row justify-content-center align-items-center">
-                <div id="stockChart" class="col-11 col-md-10 col-lg-8"></div>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container text-center">
+            <div id="tradingview_ebb94"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-TSLA/" rel="noopener" target="_blank"><span class="blue-text">TSLA stock chart</span></a> by TradingView
             </div>
+        </div>
+        <!-- TradingView Widget END -->
 
             <!-- Table -->
             <div class="text-center">

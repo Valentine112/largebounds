@@ -207,13 +207,13 @@
         $selecting->more_details("WHERE referred = ?# $refcode");
         $action = $selecting->action("username, amount, date", "referred");
         if($action != null) return $action;
-        $value = $selecting->pull();
+        $referral = $selecting->pull();
         $selecting->reset();
         
         $selecting->more_details("WHERE referred = ? AND verify = ?# $refcode# $zero");
-        $value1 = $selecting->action("username, email, verify", "user");
+        $action = $selecting->action("username, email, verify", "user");
         if($action != null) return $action;
-        $value1 = $selecting->pull();
+        $referralBonus = $selecting->pull();
         $selecting->reset();
 
         $selecting->more_details("WHERE user = ?# $userId");
@@ -246,6 +246,105 @@
         $selecting->reset();
         $packages = $selecting->pull();
 
+        $selecting->more_details("WHERE email = ?# $email");
+        $action = $selecting->action("pname, increase, pdate, date, usd, duration, profit, activate, walletbalance, counting, bonus", "user");
+        if($action != null) return $action;
+        $selecting->reset();
+        $activate = $selecting->pull();
+
+        $selecting->more_details("WHERE email = ?# $email");
+        $action = $selecting->action("pname, increase, pdate, date, usd, duration, profit, activate, walletbalance, counting, bonus", "user");
+        if($action != null) return $action;
+        $selecting->reset();
+        $activate = $selecting->pull();
+
+        $row = [];
+
+        if($activate[1] > 0):
+            $row = $activate[0][0];
+
+            $profit = $row['profit'];
+            $pdate = $row['pdate'];
+            $duration = $row['duration'];
+            $increase = $row['increase'];
+            $usd = $row['usd'];
+            $profiting = $row['profit'];
+            $counting = $row['counting'];
+            $wallet_balance = $row['walletbalance'];
+
+            if(isset($row['pdate']) &&  ($row['pdate'] != '0' && $row['pdate'] != '') && isset($row['duration'])  && isset($row['increase'])  && isset($row['usd']) && $row['activate'] == 1):
+
+            
+                $endpackage = new DateTime($pdate);
+                $endpackage->modify( '+ '.$duration. 'day');
+                $Date2 = $endpackage->format('Y-m-d');
+                $current=date("Y/m/d");
+    
+                $diff = abs(strtotime($Date2) - strtotime($current));
+                $one = 1;
+    
+                $date3 = new DateTime($Date2);
+                $date3->modify( '+'. $one.'day');
+                $date4 = $date3->format('Y-m-d');
+    
+                $days=floor($diff / (60*60*24));
+    
+                $daily = $duration - $days;
+                $percentage = ($increase/100) * $daily * $usd;
+    
+                $one = 1;
+                $f = date('Y-m-d', strtotime($Date2 . ' + '. $one.'day'));
+     
+            else:
+                $daily ="";
+                $percentage ="";
+                $Date = "0";
+                $days ="No investment";
+                $diff = "";
+                $Date2 = 'No investment';
+            endif;
+        endif;
     endif;
+
+    if(in_array($_SERVER['REQUEST_URI'], ["/user/pay?method=bitcoin", "/user/pay?method=ethereum", "/user/pay?method=bnb", "/user/pay?method=usdt"])):
+        $error_mssg = NULL;
+
+        $token = $_GET['method'];
+        $_SESSION['crypto_name'] = $token;
+
+        $result1 = Func::cleanData($token, 'string');
+
+        (string) $crypto = "";
+        (string) $wallet = "";
+        switch ($result1) {
+            case 'bitcoin':
+                $crypto = "Bitcoin";
+                $wallet = "bwallet";
+                break;
+            case 'ethereum':
+                $crypto = "Ethereum";
+                $wallet = "ewallet";
+                break;
+            case 'usdt':
+                $crypto = "USDT";
+                $wallet = "usdt";
+                break;
+            case 'bnb':
+                $crypto = "BNB";
+                $wallet = "pm";
+                break;
+            default:
+                $crypto = "Unknown";
+                break;
+        }
+
+        $selecting = $db->prepare("SELECT $wallet FROM admin WHERE email = ?");
+        $selecting->bind_param('s', $admin);
+        $selecting->execute();
+        $selecting->bind_result($wallet_address);
+        $selecting->store_result();
+        $selecting->fetch();
+    endif;
+
 
 ?>

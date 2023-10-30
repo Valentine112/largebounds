@@ -69,29 +69,22 @@
         require "src/page/user/packages.php";
     })
 
-    ->get('/admin/home', function() {
-        require "src/admin/home.php";
+    ->get('/user/deposit', function() {
+        require "src/page/user/deposit.php";
     })
 
-    ->get('/admin/create', function() {
-        require "src/admin/create.php";
+    ->get('/user/pay', function() {
+        require "src/page/user/pay.php";
     })
 
-    ->get('/admin/users', function() {
-        require "src/admin/users.php";
+    ->get('/user/activate', function() {
+        require "src/page/user/activate.php";
     })
 
-    ->get('/admin/settings', function() {
-        require "src/admin/settings.php";
+    ->get('/user/withdraw', function() {
+        require "src/page/user/withdraw.php";
     })
 
-    ->get('/admin/deposit', function() {
-        require "src/admin/deposit.php";
-    })
-
-    ->get('/admin/withdraw', function() {
-        require "src/admin/withdraw.php";
-    })
 
     ->listen();
 

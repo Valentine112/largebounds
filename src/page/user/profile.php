@@ -25,22 +25,27 @@
 
             <div class="col-6 text-right">
                 <h1>
-                    <span class="username">Himself</span>
+                    <span class="username"><?= $user['username']; ?></span>
                 </h1>
             </div>
         </div>
 
         <section class="mt-5">
             <h3>Change Profile</h3>
-            <div class="row justify-content-around align-items-center mt-3 profile-form">
+            <div class="row justify-content-around align-items-center mt-3 profile-form" data-parent="profile">
                 <div class="col-11 col-md-6">
                     <label for="fullname">Fullname</label>
-                    <input type="text" placeholder="Fullname" class="form" id="fullname">
+                    <input type="text" placeholder="Fullname" class="form" id="fullname" value="<?= $user['fname'].' '.$user['lname']; ?>">
                 </div>
 
                 <div class="col-11 col-md-6">
                     <label for="number">Phone number</label>
-                    <input type="text" placeholder="Phone number" class="form" id="number">
+                    <input type="text" placeholder="Phone number" class="form" id="number" value="<?= $user['phone']; ?>">
+                </div>
+
+                <div class="col-11 col-md-6">
+                    <label for="password">Date Joined</label>
+                    <input type="text" placeholder="Date joined" class="form" id="date" value="<?= $user['date']; ?>" disabled>
                 </div>
 
                 <div class="col-11 col-md-6">
@@ -49,16 +54,13 @@
                 </div>
 
                 <div class="col-11 col-md-6">
-                    <label for="password">Date Joined</label>
-                    <input type="text" placeholder="Date joined" class="form" id="date" disabled>
-                </div>
-
-                <div class="col-11 col-md-6">
-                    <button class="btn btn-primary form-control">Submit</button>
+                    <button class="btn btn-primary form-control" onclick="submit(this, 'profile')">Submit</button>
                 </div>
             </div>
         </section>
 
     </main>
 </body>
+<script src="../src/assets/js/main.js"></script>
+<script src="../src/assets/js/general.js"></script>
 </html>

@@ -1,21 +1,26 @@
 <?php
     ini_set("pcre.jit", "0");
     ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
     require "php/general.php";
-    use Query\Update;
+    use Query\{
+        Update,
+        Select
+    };
     use Config\Database;
-    use Query\Select;
+    use Service\Func;
 
     $db = new Database;
 
     if(isset($_POST['choosen'])){
         print_r("HELLO WORLD");
-        $pname = $db->real_escape_string($_POST['pname']);
-        $increase = $db->real_escape_string($_POST['increase']);
-        $bonus = $db->real_escape_string($_POST['bonus']);
-        $duration = $db->real_escape_string($_POST['duration']);
-        $froms = $db->real_escape_string($_POST['froms']);
-        $tos = $db->real_escape_string($_POST['tos']);
+        /*
+        $pname = Func::cleanData($_POST['pname'], 'string');
+        $increase = Func::cleanData($_POST['increase'], 'string');
+        $bonus = Func::cleanData($_POST['bonus'], 'string');
+        $duration = Func::cleanData($_POST['duration'], 'string');
+        $froms = Func::cleanData($_POST['froms'], 'string');
+        $tos = Func::cleanData($_POST['tos'], 'string');
 
         if($value1[0][0]['walletbalance'] < $froms) {
             $msg = "<span class='alert alert-danger'>Insufficient balance!</span>";
@@ -23,8 +28,10 @@
             $zero = 0;
 
             $selecting = new Select($db);
-            $selecting->more_details("WHERE email = ?, $email");
-            $value1 = $selecting->pull("activate, bonus, pname, email", "users");
+            $selecting->more_details("WHERE email = ?# $email");
+            $action = $selecting->action("activate, bonus, pname, email", "user");
+            if($action != null) return $action;
+            $value1 = $selecting->pull();
             $selecting->reset();
 
             $updating = new Update($db, "SET pname = ?, increase = ?, counting = ?, bonus = ?, duration = ?, pdate = ?, froms = ?, tos = ?, activate = ? WHERE email = ?# $pname# $increase# $duration# $bonus# $duration# $zero# $froms# $tos# $zero# $email");
@@ -47,7 +54,7 @@
                     }  
                 }
             }  
-        }
+        }*/
     }
 ?>
 <!DOCTYPE html>
@@ -76,7 +83,7 @@
 
             <div class="col-6 text-right">
                 <h1>
-                    <span class="username">Himself</span>
+                    <span class="username"><?= $user['username']; ?></span>
                 </h1>
             </div>
         </div>
@@ -93,10 +100,11 @@
                 <?php 
                 if($packages[1] > 0):
                     foreach($packages[0] as $ind => $data): ?> 
-                    <form class="col-11 col-md-5 col-lg-5 mt-2 mb-2" method="POST"> 
+                    <form class="col-11 col-md-5 col-lg-5 mt-2 mb-2" method="POST" onsubmit="event.preventDefault(); event.stopImmediatePropagation();" data-parent="packages"> 
                         <input type="hidden" name="pname" value=" <?= $data['pname'];?>">
                         <input type="hidden" name="froms" value=" <?= $data['froms'];?>">
-                            <input type="hidden" name="tos" value=" <?= $data['tos'];?>">
+                        <input type="hidden" name="tos" value=" <?= $data['tos'];?>">
+
                         <input type="hidden" name="bonus" value=" <?= $data['bonus'];?>">
                         <input type="hidden" name="increase" value=" <?= $data['increase'];?>">
                         <input type="hidden" name="duration" value=" <?= $data['duration'];?>">
@@ -136,7 +144,7 @@
                             </div>
 
                             <div>
-                                <button type="submit" name="choosen" class="btn">Select</button>
+                                <button type="submit" name="choosen" class="btn" onclick="packages(this, 'packages', {<?= $data['pname']; ?>, <?= $data['froms'];?>, <?= $data['tos'];?>, <?= $data['bonus'];?>, <?= $data['increase'];?>, <?= $data['duration'];?>)">Select</button>
                             </div>
                         </div>
                     </form>
@@ -145,4 +153,6 @@
         </section>
     </main>
 </body>
+<script src="../src/assets/js/main.js"></script>
+<script src="../src/assets/js/general.js"></script>
 </html>

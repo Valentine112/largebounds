@@ -1,3 +1,6 @@
+ul{
+    padding: 0 20px;
+}
 body{
     background-color: #000;
 }
@@ -90,4 +93,21 @@ body{
 .packages .package-box button{
     background: linear-gradient(145deg, #444, #000);
     border: 1px solid grey;
+}
+
+.activate .form, .withdraw .form, .profile .form{
+    background: linear-gradient(145deg, #444, #000)!important;
+}
+.withdraw .notice ul li{
+    padding-inline-start: 40px;
+    margin-inline-start: 40px;
+}
+.deposit .boxes img{
+    height: 100px;
+    width: 100px;
+}
+#tradingview_ebb94{
+    height: 80vh;
+    width: 90%;
+    margin: 3% auto;
 }
